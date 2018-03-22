@@ -11,8 +11,7 @@ def main():
         print("Usage:", sys.argv[0], "<input file> <output file>")
         sys.exit(1)
     
-    inputfile = sys.argv[1]
-    outputfile = sys.argv[2]
+    inputfile, outputfile = sys.argv[1], sys.argv[2]
 
     df = pd.read_csv(inputfile, header=None, encoding="big5")
     for row in np.arange(10, len(df), FEATURE_PER_DAY):
