@@ -4,13 +4,41 @@ import sys
 import os.path
 
 # Parameters
-inputfile, outputfile = sys.argv[1], sys.argv[2]
+inputfile, outputfile = sys.argv[3], sys.argv[4]
 norm_column = [0, 10, 78, 79, 80]
 
 def extract_feature(x):
     column = []
     return np.delete(x, column, 1)
     
+def get_training_data(original, valid_set_size):
+    if original:
+        filename = "train.csv"
+        filepath = DIRECTORY + filename
+        # TODO
+    else:
+        x_filename = "train_X"
+        y_filename = "train_Y"
+        x_filepath = sys.argv[1]
+        y_filepath = sys.argv[2]
+
+        if os.path.exists(x_filepath) and os.path.exists(y_filepath):
+            x = pd.read_csv(x_filepath, dtype=float).as_matrix()
+            y = pd.read_csv(y_filepath, header=None).as_matrix().flatten()
+            
+            if valid_set_size > 0:
+                x_train = x[:-valid_set_size]
+                y_train = y[:-valid_set_size]
+                x_valid = x[-valid_set_size:]
+                y_valid = y[-valid_set_size:]
+            else:
+                x_train = x
+                y_train = y
+                x_valid = []
+                y_valid = []
+            
+            return x_train, y_train, x_valid, y_valid
+
 def get_testing_data(original):
     if original:
         filename = "test.csv"
@@ -55,8 +83,9 @@ def main():
         print("Usage:", sys.argv[0], "<input file> <output file>")
         sys.exit(1)
 
+    x_train, y_train, x_valid, y_valid = get_training_data(False, 0)
     x_test = get_testing_data(False)
-    [x_test] = normalize([x_test], norm_column)
+    x_train, x_test = normalize([x_train, x_test], norm_column)
     x_test = extract_feature(x_test)
 
     w = np.load("model/generative_w.npy")
