@@ -72,10 +72,6 @@ def normalize(x_set, norm_column=[]):
     return x_set
 
 def main():
-    if len(sys.argv) < 3:
-        print("Usage:", sys.argv[0], "<input file> <output file>")
-        sys.exit(1)
-
     x_train, y_train, x_valid, y_valid = get_training_data(False, 0)
     x_test = get_testing_data(False)
     x_train, x_test = normalize([x_train, x_test], norm_column)

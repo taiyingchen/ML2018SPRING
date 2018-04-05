@@ -1,5 +1,7 @@
+from sklearn.svm import SVC
 import pandas as pd
 import numpy as np
+import pickle
 import sys
 import os.path
 
@@ -10,7 +12,7 @@ norm_column = [0, 10, 78, 79, 80]
 def extract_feature(x):
     column = []
     return np.delete(x, column, 1)
-    
+
 def get_training_data(original, valid_set_size):
     if original:
         filename = "train.csv"
@@ -55,9 +57,6 @@ def output_prediction(y_test, filename="output.csv"):
     arr = [[i+1, int(y_test[i])] for i in range(len(y_test))]
     dw = pd.DataFrame(arr, columns = ["id", "label"])
     dw.to_csv(filename, index=False)
-    
-def sigmoid(z):
-    return np.clip(1 / (1 + np.exp(-z)), 1e-10, 1-1e-10)
 
 def normalize(x_set, norm_column=[]):
     x_all = np.concatenate(x_set, axis=0)
@@ -71,24 +70,17 @@ def normalize(x_set, norm_column=[]):
             
     return x_set
 
-def get_prediction(x, w, b):
-    z = np.dot(x, w) + b
-    prob = sigmoid(z)
-    prob = np.round(prob)
-    prob = 1 - prob
-    return prob
-
 def main():
     x_train, y_train, x_valid, y_valid = get_training_data(False, 0)
     x_test = get_testing_data(False)
     x_train, x_test = normalize([x_train, x_test], norm_column)
     x_test = extract_feature(x_test)
 
-    w = np.load("model/generative_w.npy")
-    b = np.load("model/generative_b.npy")
+    with open("model/svc.pickle", "rb") as f:
+        svc = pickle.load(f)
 
-    prob = get_prediction(x_test, w, b)
-    output_prediction(prob, outputfile)
+    y_test_svc = svc.predict(x_test)
+    output_prediction(y_test_svc, outputfile)
 
 if __name__ == "__main__":
     main()
