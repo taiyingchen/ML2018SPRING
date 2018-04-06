@@ -90,7 +90,7 @@ def normalize(x_set, norm_column=[]):
 
 
 # Get data
-x_train, y_train, x_valid, y_valid = get_training_data(False, 1000)
+x_train, y_train, x_valid, y_valid = get_training_data(False, 0)
 x_test = get_testing_data(False)
 
 
@@ -106,6 +106,14 @@ else:
     
 x_train = extract_feature(x_train)
 x_test = extract_feature(x_test)
+
+
+# In[ ]:
+
+
+x_train = np.concatenate((x_train, x_train**2, x_train**3), axis=1)
+x_valid = np.concatenate((x_valid, x_valid**2, x_valid**3), axis=1)
+x_test = np.concatenate((x_test, x_test**2, x_test**3), axis=1)
 
 
 # ### hw2_best
@@ -152,14 +160,17 @@ from sklearn.svm import SVC
 import pickle
 
 svc = SVC(kernel='rbf')
-svc.fit(x_train,y_train)
+svc.fit(x_train, y_train)
 
-with open('svc.pickle', 'wb') as f:
-    pickle.dump(svc_radical, f)
-
-with open('svc.pickle', 'rb') as f:
-    svc = pickle.load(f)
+svc.score(x_train, y_train)
 
 y_test_svc = svc.predict(x_test)
 output_prediction(y_test_svc, "svc.csv")
+
+
+# In[ ]:
+
+
+# with open('svc.pickle', 'wb') as f:
+#     pickle.dump(svc, f)
 

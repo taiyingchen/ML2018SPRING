@@ -1,4 +1,5 @@
 hw1/
+.ipynb_checkpoints/
 
 *.csv
 *.docx
