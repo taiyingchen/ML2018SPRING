@@ -75,6 +75,7 @@ def main():
     x_test = get_testing_data(False)
     x_train, x_test = normalize([x_train, x_test], norm_column)
     x_test = extract_feature(x_test)
+    x_test = np.concatenate((x_test, x_test**2, x_test**3), axis=1)
 
     with open("model/svc.pickle", "rb") as f:
         svc = pickle.load(f)
