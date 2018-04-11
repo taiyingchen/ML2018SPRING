@@ -31,10 +31,26 @@ append new training data造成training set後段全為new training data => shuff
 
 ## Tips
 
-np.tocategorical <-> np.argmax
+### One Hot Encoding & Decoding
+
+np.to_categorical <-> np.argmax
+
+### Load Keras Model
+
+```python
+from keras.models import load_model
+
+model.save('my_model.h5')  # creates a HDF5 file 'my_model.h5'
+del model  # deletes the existing model
+
+# returns a compiled model
+# identical to the previous one
+model = load_model('my_model.h5')
+```
 
 ## Reference
 
 [[Python] Pandas 基礎教學](https://oranwind.org/python-pandas-ji-chu-jiao-xue/)
 [學習使用Keras建立卷積神經網路](https://chtseng.wordpress.com/2017/09/23/%E5%AD%B8%E7%BF%92%E4%BD%BF%E7%94%A8keras%E5%BB%BA%E7%AB%8B%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/)
 [Data Augmentation 資料增強](https://chtseng.wordpress.com/2017/11/11/data-augmentation-%E8%B3%87%E6%96%99%E5%A2%9E%E5%BC%B7/)
+[How can I save a Keras model?](https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model)
