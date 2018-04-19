@@ -54,3 +54,11 @@ model = load_model('my_model.h5')
 [學習使用Keras建立卷積神經網路](https://chtseng.wordpress.com/2017/09/23/%E5%AD%B8%E7%BF%92%E4%BD%BF%E7%94%A8keras%E5%BB%BA%E7%AB%8B%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/)
 [Data Augmentation 資料增強](https://chtseng.wordpress.com/2017/11/11/data-augmentation-%E8%B3%87%E6%96%99%E5%A2%9E%E5%BC%B7/)
 [How can I save a Keras model?](https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model)
+
+### Batch Normalization
+
+[Why does Batch Norm work?](https://www.coursera.org/learn/deep-neural-network/lecture/81oTm/why-does-batch-norm-work)
+
+### Confusion Matrix
+
+[scikit-learn toolkit](http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html#sphx-glr-auto-examples-model-selection-plot-confusion-matrix-py)ㄑ
