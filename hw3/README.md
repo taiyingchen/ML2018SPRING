@@ -25,9 +25,9 @@ label   counts
 
 ## Procedure
 
-原始label為厭惡的training data太少，僅有436筆，導致predict不出厭惡的label => 以左右鏡相翻轉再得到436筆training data
+原始label為厭惡的training data太少，僅有436筆，導致predict不出厭惡的label -> 以左右鏡相翻轉再得到436筆training data
 
-append new training data造成training set後段全為new training data => shuffle images and labels
+append new training data造成training set後段全為new training data -> shuffle images and labels
 
 ## Tips
 
@@ -61,4 +61,4 @@ model = load_model('my_model.h5')
 
 ### Confusion Matrix
 
-[scikit-learn toolkit](http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html#sphx-glr-auto-examples-model-selection-plot-confusion-matrix-py)ㄑ
+[scikit-learn toolkit](http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html#sphx-glr-auto-examples-model-selection-plot-confusion-matrix-py)
