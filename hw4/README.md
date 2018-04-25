@@ -24,11 +24,11 @@ PCA演算法步驟：
 PCA
 
 [機器學習(6)--主成分分析(Principal component analysis，PCA)](http://arbu00.blogspot.tw/2017/02/6-principal-component-analysispca.html)
-[Two-Dimensional PCA:
-A New Approach to Appearance-Based
-Face Representation and Recognition](http://ira.lib.polyu.edu.hk/bitstream/10397/190/1/137.pdf)
+
+[Two-Dimensional PCA: A New Approach to Appearance-Based Face Representation and Recognition](http://ira.lib.polyu.edu.hk/bitstream/10397/190/1/137.pdf)
 
 Image Clustering
 
 [sklearn.manifold.TSNE](http://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html)
+
 [sklearn.cluster.KMeans](http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)
