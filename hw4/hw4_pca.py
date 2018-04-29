@@ -5,7 +5,7 @@ import os
 import sys
 
 IMAGE_FOLDER = sys.argv[1]
-output_path = sys.argv[2]
+OUTPUT_PATH = sys.argv[2]
 height = width = 600
 channel = 3
 
@@ -25,7 +25,7 @@ def output_image(image):
     image -= np.min(image)
     image /= np.max(image)
     image = (image*255).astype(np.uint8)
-    io.imsave(output_path, image)
+    io.imsave(OUTPUT_PATH, image)
 
 def main():
     image_files = sorted(os.listdir(IMAGE_FOLDER))
@@ -40,8 +40,8 @@ def main():
     U, s, V = np.linalg.svd((X_train-X_mean).T, full_matrices=False)
 
     eigen_faces = U.T[:4]
-    ensure_dir(output_path)
-    index = image_files.index(os.path.basename(output_path))
+    ensure_dir(OUTPUT_PATH)
+    index = image_files.index(os.path.basename(OUTPUT_PATH))
     image = X_train[index]
 
     # Reconstruction
