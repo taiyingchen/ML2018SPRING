@@ -3,11 +3,14 @@ from sklearn.cluster import KMeans
 import numpy as np
 import os
 import sys
+import pickle
 
 height = width = 28
 IMAGE_PATH = sys.argv[1]
 TEST_CASE_PATH = sys.argv[2]
 OUTPUT_PATH = sys.argv[3]
+MAPPING_PATH = "X_train_labels.npy"
+KMEANS_PATH = "kmeans.pickle"
 
 def ensure_dir(filepath):
     directory = os.path.dirname(filepath)
@@ -39,8 +42,11 @@ def dimension_reduction(X_train):
     return X_train_pca
 
 def clustering(X_train):
-    kmeans = KMeans(n_clusters=2, random_state=0).fit(X_train)
-    X_train_labels = kmeans.labels_
+    with open(KMEANS_PATH, 'rb') as file:
+        kmeans = pickle.load(file)
+
+    # kmeans = KMeans(n_clusters=2, random_state=0).fit(X_train)
+    X_train_labels = kmeans.predict(X_train)
 
     return X_train_labels
 
@@ -50,20 +56,20 @@ def output_file(X_train_labels, X_test):
     cnt = 0
     for i, j in X_test:
         if X_train_labels[i] == X_train_labels[j]:
-            cnt +=1
+            cnt += 1
             output.append(1)
         else:
             output.append(0)
-            
-    print(cnt)
+    print("Number of same clusters: %i" % cnt)
     with open(OUTPUT_PATH, 'w') as file:
         file.write("ID,Ans\n")
         file.write('\n'.join(['{},{}'.format(index, element) for index, element in enumerate(output)]))
 
 def main():
     X_train, X_test = load_data()
-    X_train_pca = dimension_reduction(X_train)
-    X_train_labels = clustering(X_train_pca)
+    # X_train_pca = dimension_reduction(X_train)
+    # X_train_labels = clustering(X_train_pca)
+    X_train_labels = np.load(MAPPING_PATH)
     ensure_dir(OUTPUT_PATH)
     output_file(X_train_labels, X_test)
 
