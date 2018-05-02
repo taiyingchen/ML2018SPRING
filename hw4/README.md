@@ -27,6 +27,8 @@ PCA
 
 [Two-Dimensional PCA: A New Approach to Appearance-Based Face Representation and Recognition](http://ira.lib.polyu.edu.hk/bitstream/10397/190/1/137.pdf)
 
+[PCA Whitening](http://ufldl.stanford.edu/tutorial/unsupervised/PCAWhitening/)
+
 Image Clustering
 
 [sklearn.manifold.TSNE](http://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html)

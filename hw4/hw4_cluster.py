@@ -9,8 +9,8 @@ height = width = 28
 IMAGE_PATH = sys.argv[1]
 TEST_CASE_PATH = sys.argv[2]
 OUTPUT_PATH = sys.argv[3]
-MAPPING_PATH = "X_train_labels.npy"
 KMEANS_PATH = "kmeans.pickle"
+CC_PATH = "cluster_center.npy"
 
 def ensure_dir(filepath):
     directory = os.path.dirname(filepath)
@@ -42,10 +42,10 @@ def dimension_reduction(X_train):
     return X_train_pca
 
 def clustering(X_train):
-    with open(KMEANS_PATH, 'rb') as file:
-        kmeans = pickle.load(file)
-
-    # kmeans = KMeans(n_clusters=2, random_state=0).fit(X_train)
+    # with open(KMEANS_PATH, 'rb') as file:
+    #     kmeans = pickle.load(file)
+    cluster_center = np.load(CC_PATH)
+    kmeans = KMeans(n_clusters=2, random_state=0, init=cluster_center, n_init=1).fit(X_train)
     X_train_labels = kmeans.predict(X_train)
 
     return X_train_labels
@@ -67,9 +67,8 @@ def output_file(X_train_labels, X_test):
 
 def main():
     X_train, X_test = load_data()
-    # X_train_pca = dimension_reduction(X_train)
-    # X_train_labels = clustering(X_train_pca)
-    X_train_labels = np.load(MAPPING_PATH)
+    X_train_pca = dimension_reduction(X_train)
+    X_train_labels = clustering(X_train_pca)
     ensure_dir(OUTPUT_PATH)
     output_file(X_train_labels, X_test)
 
