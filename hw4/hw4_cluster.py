@@ -9,8 +9,8 @@ height = width = 28
 IMAGE_PATH = sys.argv[1]
 TEST_CASE_PATH = sys.argv[2]
 OUTPUT_PATH = sys.argv[3]
-KMEANS_PATH = "kmeans.pickle"
-CC_PATH = "cluster_center.npy"
+KMEANS_PATH = "model/kmeans.pickle"
+CC_PATH = "model/cluster_center.npy"
 
 def ensure_dir(filepath):
     directory = os.path.dirname(filepath)
