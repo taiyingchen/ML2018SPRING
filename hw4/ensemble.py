@@ -44,7 +44,6 @@ def main():
     dt_clf = DecisionTreeClassifier(random_state=0)
     dt_clf.fit(x_train, y_train)
     dt_acc = dt_clf.score(x_valid, y_valid)
-    
     # Random Forest
     rf_clf = RandomForestClassifier(oob_score=True,random_state=0)
     rf_clf.fit(x_train, y_train)
