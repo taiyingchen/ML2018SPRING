@@ -2,7 +2,6 @@ import argparse
 import logging
 import os
 import pickle
-import sys
 
 import numpy as np
 from keras.models import load_model
@@ -41,6 +40,7 @@ def get_testing_data():
 
 def output_file(output):
     logging.info("Output prediction to file")
+    ensure_dir(args.output_path)
     with open(args.output_path, 'w') as file:
         file.write("id,label\n")
         file.write('\n'.join(['{},{}'.format(index, label) for index, label in enumerate(output)]))
