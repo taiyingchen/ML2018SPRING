@@ -23,9 +23,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument("action", choices=["train", "semi"])
 parser.add_argument("label_training_path")
 parser.add_argument("unlabel_training_path")
+parser.add_argument("tokenizer_path")
 parser.add_argument("word2vec_model_path")
 parser.add_argument("rnn_model_path")
-parser.add_argument("tokenizer_path")
 # Model parameters
 parser.add_argument("--remove_stopwords", default=False, type=bool)
 parser.add_argument("--remove_duplichar", default=False, type=bool)
@@ -107,6 +107,7 @@ def get_tokenizer(X):
     tokenizer = Tokenizer(num_words=args.dict_size)
     tokenizer.fit_on_texts(X)
     # Save tokenizer
+    ensure_dir(args.tokenizer_path)
     with open(args.tokenizer_path, 'wb') as file:
         pickle.dump(tokenizer, file)
     return tokenizer
@@ -119,6 +120,7 @@ def get_word2vec(X):
     logging.info("Get word2vec model")
     X = sent2word(X)
     w2v_model = word2vec.Word2Vec(X, size=args.embed_dim)
+    ensure_dir(args.word2vec_model_path)
     w2v_model.save(args.word2vec_model_path)
     return w2v_model
     
@@ -188,6 +190,7 @@ def main():
     w2v_model = get_word2vec(X_all)
     embedding_matrix = get_embedding_matrix(tokenizer, w2v_model)
     model = get_RNN(embedding_matrix)
+    ensure_dir(args.rnn_model_path)
     checkpoint = ModelCheckpoint(args.rnn_model_path,
                                  monitor="val_acc",
                                  verbose=1,
