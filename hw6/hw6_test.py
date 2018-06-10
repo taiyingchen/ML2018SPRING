@@ -12,8 +12,8 @@ logging.basicConfig(level=logging.INFO)
 parser = argparse.ArgumentParser()
 # Path arguments
 parser.add_argument("testing_data_path")
-parser.add_argument("model_path")
 parser.add_argument("output_path")
+parser.add_argument("model_path")
 # Model arguments
 parser.add_argument("--norm_method", default=None, type=str)
 args = parser.parse_args()
