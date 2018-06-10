@@ -2,7 +2,9 @@ hw1/
 hw2/
 hw3/
 hw4/
+hw5/
 .ipynb_checkpoints/
 
 *.csv
 *.docx
+*.txt
